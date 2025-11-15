@@ -1,0 +1,13 @@
+{
+  "name": "sapobot",
+  "version": "1.0.0",
+  "description": "SapoBot - A Lightbot clone",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.x"
+  }
+}
+
