@@ -1,0 +1,816 @@
+/* GENERAL HTML TAGS
+   ================================================== */
+
+body {
+  font-size: 11px;
+  font-family: 'Lato', sans-serif;
+  color: #e0e0e0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3 {
+  font-weight: 900;
+  padding: 0 5px;
+  margin: 0;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 31px;
+  margin: 40px;
+  background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 18px;
+  padding: 5px;
+  border-bottom: 2px solid #4a4a4a;
+  color: #e0e0e0;
+}
+
+h3 {
+  font-size: 20px;
+  margin: 5px 0 0 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #b0b0b0;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #e0e0e0;
+  text-decoration: underline;
+}
+
+
+/* JQUERY UI
+   ================================================== */
+
+.ui-widget-content {
+  border: 1px solid #3a3a3a;
+  background: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ===[ JQuery UI dialogs ]=== */
+
+.ui-dialog {
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.ui-dialog-titlebar {
+  border: 0;
+  background: #2a2a2a;
+  border-bottom: 2px solid #3a3a3a;
+}
+
+.ui-dialog-title {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  color: #e0e0e0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.ui-dialog-content {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #e0e0e0;
+  background: #1a1a1a;
+}
+
+/* ===[ JQuery UI buttons ]=== */
+
+.ui-button.ui-state-default {
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ui-button.ui-state-hover {
+  background: #3a3a3a;
+  border-color: #4a4a4a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.ui-button.ui-state-highlight {
+  background: #3a3a3a;
+  border-color: #4a4a4a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.ui-button .ui-button-text {
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ===[ JQuery UI accordion ]=== */
+
+.ui-accordion .ui-accordion-header {
+  border: 1px solid #3a3a3a;
+  margin-top: 5px;
+  background: #2a2a2a;
+  background-image: none;
+  padding-left: 20px;
+  transition: all 0.3s ease;
+}
+
+.ui-accordion .ui-accordion-header a {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  color: #e0e0e0;
+  padding-left: 0;
+  font-size: 14px;
+}
+
+.ui-accordion .ui-accordion-header.ui-state-active {
+  border-color: #4a4a4a;
+  background: #3a3a3a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.ui-accordion .ui-accordion-header.ui-state-active a{
+  color: #e0e0e0;
+}
+
+.ui-accordion .ui-accordion-header.ui-state-hover:not(.ui-state-active) {
+  border-color: #4a4a4a;
+  background: #3a3a3a;
+}
+
+.ui-accordion .ui-accordion-header:first-child {
+  margin-top: 0px;
+}
+
+.ui-accordion .ui-accordion-content {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  border: 1px solid #3a3a3a;
+  border-top: 0px;
+  margin-top: -3px;
+  background: #1a1a1a;
+  background-image: none;
+  padding: 10px 20px;
+  color: #e0e0e0;
+}
+
+/* ===[ Additional JQuery icons (achievements and medals) ]=== */
+
+.achievement {
+  background-image: url('../img/achievement.png');
+  width: 32px;
+  height: 32px;
+}
+
+.medal {
+  background-image: url('../img/medals.png');
+  width: 32px;
+  height: 32px;
+}
+
+.medal-gold {
+  background-position: -32px 0;
+}
+
+.medal-silver {
+  background-position: -64px 0;
+}
+
+.medal-bronze {
+  background-position: -96px 0;
+}
+
+.flip {
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: fliph; /*IE*/
+}
+
+.ui-icon-close {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.ui-icon-close:hover {
+  opacity: 1;
+}
+
+/* SCREENS
+   ================================================== */
+
+#lightbot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1486px;
+  height: 740px;
+  margin-left: -743px;
+  margin-top: -370px;
+}
+
+#credits {
+  font-size: 13px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 20px;
+  text-align: center;
+  color: #666;
+}
+
+#credits2 {
+  font-size: 13px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 16px;
+  text-align: center;
+  color: #666;
+}
+
+.ui-screen {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  height: 700px;
+  border: 1px solid #3a3a3a;
+  background: #1a1a1a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+#welcomeScreen {
+  background: url('../img/welcome_screen_bg.png') no-repeat center center;
+  background-size: contain;
+}
+
+#gameScreen {
+  background: #000;
+}
+
+/* WELCOME SCREEN
+   ================================================== */
+
+#welcomeScreen .helpButton, #welcomeScreen .achievementsButton, #welcomeScreen .levelSelectButton, #welcomeScreen .audioToggleButton, #welcomeScreen .saveDataButton {
+  position: absolute;
+  bottom: 20px;
+}
+
+#welcomeScreen .levelSelectButton {
+  bottom: 19px;
+}
+
+#welcomeScreen .audioToggleButton {
+  right: 40px;
+}
+
+#welcomeScreen .helpButton {
+  right: 75px;
+}
+
+#welcomeScreen .achievementsButton {
+  right: 150px;
+}
+
+#welcomeScreen .levelSelectButton {
+  right: 278px;
+  border-width: 2px;
+}
+
+#welcomeScreen #exportDataButton {
+  left: 40px;
+  bottom: 60px;
+}
+
+#welcomeScreen #importDataButton {
+  left: 40px;
+  bottom: 20px;
+}
+
+/* ACHIEVEMENTS SCREEN
+   ================================================== */
+
+#achievementsScreen .mainMenuButton {
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+}
+
+#achievementsList {
+  height: 513px;
+  overflow: auto;
+  padding: 0px;
+  margin: 0px 40px;
+  color: #e0e0e0;
+  list-style-type: none;
+}
+
+#achievementsList li {
+  border: 1px solid #3a3a3a;
+  background: #2a2a2a;
+  height: 50px;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#achievementsList li:hover {
+  border-color: #4a4a4a;
+  background: #3a3a3a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transform: translateX(5px);
+}
+
+#achievementsList li img {
+  float: left;
+  margin:5px 15px 5px 5px;
+}
+
+/* LEVEL SELECT SCREEN
+   ================================================== */
+
+#levelSelectScreen .mainMenuButton {
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+}
+
+#levelSelectScreen {
+  overflow: hidden;
+  position: relative;
+}
+
+#levelSelectScreen ul {
+  width: 700px;
+  max-width: calc(100% - 40px);
+  list-style-type: none;
+  margin: 50px auto;
+  padding: 0;
+  max-height: calc(100% - 200px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Custom scrollbar for level select */
+#levelSelectScreen ul::-webkit-scrollbar {
+  width: 8px;
+}
+
+#levelSelectScreen ul::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+#levelSelectScreen ul::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 4px;
+}
+
+#levelSelectScreen ul::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+#levelSelectScreen li {
+  margin: 5px 5px;
+  padding: 1px;
+  float: left;
+  width: 120px;
+  height: 90px;
+  font-size: 4em;
+  line-height: 2em;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid #3a3a3a;
+  background: #2a2a2a;
+  color: #e0e0e0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#levelSelectScreen li.ui-state-highlight {
+  color: #ffffff;
+  background: #3a3a3a;
+  border-color: #4a4a4a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+#levelSelectScreen li.ui-state-highlight.ui-state-hover {
+  background: #4a4a4a;
+  border-color: #5a5a5a;
+  transform: scale(1.05);
+}
+
+#levelSelectScreen li.ui-state-hover:not(.ui-state-highlight) {
+  border-color: #4a4a4a;
+  background: #3a3a3a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Medal requirements display */
+.medal-requirements {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  font-size: 10px;
+  line-height: 1.3;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 3px 2px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 3px;
+  border-top: 1px solid rgba(58, 58, 58, 0.5);
+}
+
+.medal-req {
+  display: inline-block;
+  padding: 2px 4px;
+  font-weight: 700;
+  font-size: 9px;
+  color: #e0e0e0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+  font-family: 'PT Sans', sans-serif;
+}
+
+.medal-req.gold {
+  color: #ffd700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 4px rgba(255, 215, 0, 0.5);
+}
+
+.medal-req.silver {
+  color: #c0c0c0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.medal-req.bronze {
+  color: #cd7f32;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+/* GAME SCREEN
+   ================================================== */
+
+#gameScreen .level-indicator {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  color: #4a4a4a;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 1000;
+  font-family: 'Lato', sans-serif;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+#canvasContainer {
+  position: absolute;
+  top: 1px;
+  left: 0px;
+  width: 1200px;
+  height: 666px;
+  background-color: #0a0a0a;
+  border: 1px solid #3a3a3a;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#buttonContainer {
+  position: absolute;
+  left: 0px;
+  bottom: 1px;
+  width: 1200px;
+  height: 30px;
+  background: #2a2a2a;
+  border-top: 1px solid #3a3a3a;
+}
+
+/* ===[ Instruction Container ]=== */
+
+#instructionsContainer {
+  position: absolute;
+  top: 1px;
+  left: 1200px;
+  width: 286px;
+  height: 220px;
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#instructionsContainer > div.ui-widget-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 0px;
+  background: transparent;
+  /* Ensure scrollbar is visible on mobile */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a #1a1a1a;
+}
+
+#instructionsContainer li {
+  cursor: move;
+}
+
+#instructionsContainer .ui-icon-close, li.ui-draggable-dragging .ui-icon-close {
+  display: none;
+}
+
+#instructionsContainer li div, li.ui-draggable-dragging div, #instructionsContainer li span:first-child + span {
+  display: none;
+}
+
+/* ===[ Program Container ]=== */
+
+#programContainer {
+  position: absolute;
+  top: 222px;
+  left: 1200px;
+  width: 286px;
+  height: 444px;
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#programContainer input[type="number"] {
+  margin: 0px;
+  padding: 0px;
+  width: 40px;
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  color: #e0e0e0;
+}
+
+#programContainer input[type="number"]:focus {
+  border-color: #4a4a4a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(74, 74, 74, 0.5);
+}
+
+/* allows the droppable program container to show a scrollbar when the program fills up */
+#programContainer > div {
+  height: 442px;
+  overflow: auto;
+  background: transparent;
+}
+
+/* Custom scrollbar for dark theme */
+#programContainer > div::-webkit-scrollbar,
+#instructionsContainer > div::-webkit-scrollbar {
+  width: 8px;
+}
+
+#programContainer > div::-webkit-scrollbar-track,
+#instructionsContainer > div::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+#programContainer > div::-webkit-scrollbar-thumb,
+#instructionsContainer > div::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 4px;
+}
+
+#programContainer > div::-webkit-scrollbar-thumb:hover,
+#instructionsContainer > div::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+/* the droppable area should fill the entire programcontainer */
+#programContainer > div > ul {
+  min-height: 417px;
+}
+
+#programContainer li {
+  cursor: move;
+}
+
+/* sortable helper */
+#programContainer li.ui-state-highlight {
+  height: 18px;
+  background: rgba(74, 74, 74, 0.3);
+  border: 1px dashed #4a4a4a;
+}
+
+#programContainer > div.ui-widget-content {
+  height: 438px;
+  border: 0px;
+  overflow: auto;
+  background: transparent;
+}
+
+#instructionsContainer ul, #programContainer ul {
+  margin: 0em;
+  list-style: none;
+  padding: 5px;
+}
+
+#instructionsContainer ul.ui-droppable, #programContainer ul.ui-droppable {
+  padding-bottom: 20px;
+}
+
+#instructionsContainer li, #programContainer li, li.ui-draggable-dragging {
+  list-style: none;
+  border: 1px solid #3a3a3a;
+  margin: 0 0 2px 0;
+  padding: 5px 5px;
+  font-size: 11px;
+  /* Prevent text selection on touch devices */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#instructionsContainer li p, #programContainer li p, li.ui-draggable-dragging p {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 0.1em;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 700;
+  color: #e0e0e0;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+#instructionsContainer li.ui-state-hover, #programContainer li.ui-state-hover {
+  background: #3a3a3a;
+  border-color: #4a4a4a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transform: translateX(2px);
+}
+
+li.ui-draggable-dragging {
+  width: 150px;
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border-color: #4a4a4a;
+}
+
+/* highlight droppable areas with a color */
+.ui-state-droppable {
+  background: rgba(74, 74, 74, 0.2) !important;
+  border-color: #4a4a4a !important;
+}
+
+/* highlight the droppable area the mouse is currently hovering with another color */
+.ui-state-droppable-hover {
+  background: rgba(74, 74, 74, 0.3) !important;
+  border-color: #4a4a4a !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* HELP SCREEN
+   ================================================== */
+
+#helpScreenAccordionContainer {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 400px;
+}
+
+#helpScreenVerticalBar {
+  position: absolute;
+  top: 0px;
+  left: 466px;
+  width: 42px;
+  height: 700px;
+  background: url('../img/helpscreen_vertical_bar.png');
+  opacity: 0.3;
+}
+
+#helpScreen .mainMenuButton {
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+}
+
+#videoContainer {
+  position: absolute;
+  top: 175px;
+  right: 40px;
+  width: 400px;
+}
+
+/* Placeholder styling */
+.placeholder {
+  color: #666 !important;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+/* Repeat instruction inner area */
+.droppable {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: 1px dashed #3a3a3a !important;
+  margin: 5px;
+  border-radius: 4px;
+}
+
+.droppable.ui-state-droppable {
+  border-color: #4a4a4a !important;
+  background: rgba(74, 74, 74, 0.2) !important;
+}
+
+.droppable.ui-state-droppable-hover {
+  border-color: #4a4a4a !important;
+  background: rgba(74, 74, 74, 0.3) !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch target sizes on mobile */
+  #instructionsContainer li, #programContainer li {
+    min-height: 44px; /* Minimum touch target size */
+    padding: 8px 5px;
+  }
+  
+  /* Make dragging helper more visible on touch devices */
+  li.ui-draggable-dragging {
+    opacity: 0.95;
+    transform: scale(1.1);
+    z-index: 10000 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Improve button touch targets */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Ensure instructions container is scrollable on mobile */
+  #instructionsContainer {
+    height: auto;
+    max-height: 50vh;
+  }
+  
+  #instructionsContainer > div.ui-widget-content {
+    max-height: calc(50vh - 40px);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Make scrollbar more visible on mobile */
+  #instructionsContainer > div.ui-widget-content::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  #instructionsContainer > div.ui-widget-content::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+    border-radius: 6px;
+  }
+}
+
+/* Prevent text selection during drag on all devices */
+.ui-draggable-dragging,
+.ui-draggable-dragging * {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  pointer-events: none;
+}
+
+/* Ensure helper is visible and properly positioned */
+.ui-draggable-helper {
+  pointer-events: none;
+  z-index: 10000 !important;
+}
