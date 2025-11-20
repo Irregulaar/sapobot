@@ -12,6 +12,24 @@ $(document).ready(function() {
     lightBot.ui.showHelpScreen();
   });
 
+  // show sandbox (map editor) screen button
+  $('.sandboxButton').button({
+    icons: {
+      primary: "ui-icon-pencil"
+    }
+  }).click(function() {
+    lightBot.ui.showSandboxScreen();
+  });
+
+  // show community screen button
+  $('.communityButton').button({
+    icons: {
+      primary: "ui-icon-person"
+    }
+  }).click(function() {
+    lightBot.ui.showCommunityScreen();
+  });
+
   // show welcome screen button
   $('.mainMenuButton').button({
     icons: {
@@ -36,7 +54,12 @@ $(document).ready(function() {
       primary: "ui-icon-power"
     }
   }).click(function() {
-    lightBot.ui.showLevelSelectScreen();
+    if (window.lightBot && lightBot.currentCommunityMap) {
+      lightBot.currentCommunityMap = false;
+      lightBot.ui.showCommunityScreen();
+    } else {
+      lightBot.ui.showLevelSelectScreen();
+    }
   });
   $('#gameScreen .levelSelectButton').button('option', {icons: {primary: 'ui-icon-home'}});
 
@@ -122,6 +145,46 @@ $(document).ready(function() {
     }
   });
   $('#importDataButton').button('option', {icons: {primary: 'ui-icon-folder-open'}});
+
+  // game camera rotation buttons
+  $('#gameRotateLeftButton').button({
+    icons: {
+      primary: 'ui-icon-arrowreturnthick-1-w'
+    }
+  }).click(function() {
+    if (!window.lightBot) {
+      window.lightBot = {};
+    }
+    lightBot.viewRotation = ((lightBot.viewRotation || 0) + 3) % 4;
+    if (lightBot.updateProjection) {
+      lightBot.updateProjection();
+    }
+  });
+
+  $('#gameRotateRightButton').button({
+    icons: {
+      primary: 'ui-icon-arrowreturnthick-1-e'
+    }
+  }).click(function() {
+    if (!window.lightBot) {
+      window.lightBot = {};
+    }
+    lightBot.viewRotation = ((lightBot.viewRotation || 0) + 1) % 4;
+    if (lightBot.updateProjection) {
+      lightBot.updateProjection();
+    }
+  });
+
+  // community refresh button
+  $('#communityRefreshButton').button({
+    icons: {
+      primary: "ui-icon-refresh"
+    }
+  }).click(function() {
+    if (lightBot && lightBot.ui && lightBot.ui.showCommunityScreen) {
+      lightBot.ui.showCommunityScreen(true);
+    }
+  });
 
   // help screen accordion (header buttons)
   $('#helpScreenAccordion').accordion({

@@ -15,6 +15,13 @@ var canvasView = function(canvas) {
 
   // create projection - will be updated when map loads
   lightBot.projection = new lightBot.Projection(canvas.get(0).height, canvas.get(0).width / 2, offsetY);
+  // camera rotation index (0-3), used by box renderer
+  if (!window.lightBot) {
+    window.lightBot = {};
+  }
+  if (typeof lightBot.viewRotation === 'undefined') {
+    lightBot.viewRotation = 0;
+  }
   
   // Function to update projection when map is loaded
   lightBot.updateProjection = function() {
@@ -86,6 +93,23 @@ var canvasView = function(canvas) {
     lightBot.step();
     lightBot.draw();
   }
+
+  // keyboard shortcuts for camera rotation in game (Q/E)
+  $(document).keydown(function(e) {
+    // ignore when focused on inputs
+    var tag = e.target && e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') {
+      return;
+    }
+    // q / Q -> rotate left
+    if (e.key === 'q' || e.key === 'Q') {
+      $('#gameRotateLeftButton').click();
+    }
+    // e / E -> rotate right
+    if (e.key === 'e' || e.key === 'E') {
+      $('#gameRotateRightButton').click();
+    }
+  });
 
   function step() {
     lightBot.bot.step();

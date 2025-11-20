@@ -19,6 +19,27 @@
   var colorTopLightOff = "#0468fb";
   var colorTopLightOffOverlay = "#4c81ff";
 
+  function projectRotated(wx, wy, wz) {
+    var rx = wx;
+    var rz = wz;
+    var rot = (lightBot.viewRotation || 0) % 4;
+    switch (rot) {
+      case 1: // 90°
+        rx = wz;
+        rz = -wx;
+        break;
+      case 2: // 180°
+        rx = -wx;
+        rz = -wz;
+        break;
+      case 3: // 270°
+        rx = -wz;
+        rz = wx;
+        break;
+    }
+    return lightBot.projection.project(rx, wy, rz);
+  }
+
   // pulse values (pulse is the lighter color in the middle of the top face)
   var pulseSize = 0.5; // this represents the minimum percentage of surface that will be covered (0=disappears completely,1=always entire face), same for all lightboxes
   var animationFrames = 30; // # of frames for the pulse to fully grow/shrink, same for all lightboxes
@@ -28,10 +49,10 @@
   function drawTopFaceBox() {
     // top face: p1 is front left and rest is counter-clockwise
     lightBot.ctx.fillStyle = colorTop;
-    var p1 = lightBot.projection.project(this.x * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
-    var p2 = lightBot.projection.project((this.x+1) * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
-    var p3 = lightBot.projection.project((this.x+1) * edgeLength, this.getHeight() * edgeLength, (this.y+1) * edgeLength);
-    var p4 = lightBot.projection.project(this.x * edgeLength, this.getHeight() * edgeLength, (this.y+1) * edgeLength);
+    var p1 = projectRotated(this.x * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
+    var p2 = projectRotated((this.x+1) * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
+    var p3 = projectRotated((this.x+1) * edgeLength, this.getHeight() * edgeLength, (this.y+1) * edgeLength);
+    var p4 = projectRotated(this.x * edgeLength, this.getHeight() * edgeLength, (this.y+1) * edgeLength);
     lightBot.ctx.beginPath();
     lightBot.ctx.moveTo(p1.x, p1.y);
     lightBot.ctx.lineTo(p2.x, p2.y);
@@ -61,10 +82,10 @@
     // top face overlay: p1 is front left and rest is counter-clockwise
     var overlayOffset = (1-(this.currentAnimationFrame / animationFrames)) * ((1-pulseSize) * edgeLength / 2);
     lightBot.ctx.fillStyle = this.lightOn ? colorTopLightOnOverlay : colorTopLightOffOverlay;
-    p1 = lightBot.projection.project(this.x * edgeLength + overlayOffset, this.getHeight() * edgeLength, this.y * edgeLength + overlayOffset);
-    p2 = lightBot.projection.project((this.x+1) * edgeLength - overlayOffset, this.getHeight() * edgeLength, this.y * edgeLength + overlayOffset);
-    p3 = lightBot.projection.project((this.x+1) * edgeLength - overlayOffset, this.getHeight() * edgeLength, (this.y+1) * edgeLength - overlayOffset);
-    p4 = lightBot.projection.project(this.x * edgeLength + overlayOffset, this.getHeight() * edgeLength, (this.y+1) * edgeLength - overlayOffset);
+    p1 = projectRotated(this.x * edgeLength + overlayOffset, this.getHeight() * edgeLength, this.y * edgeLength + overlayOffset);
+    p2 = projectRotated((this.x+1) * edgeLength - overlayOffset, this.getHeight() * edgeLength, this.y * edgeLength + overlayOffset);
+    p3 = projectRotated((this.x+1) * edgeLength - overlayOffset, this.getHeight() * edgeLength, (this.y+1) * edgeLength - overlayOffset);
+    p4 = projectRotated(this.x * edgeLength + overlayOffset, this.getHeight() * edgeLength, (this.y+1) * edgeLength - overlayOffset);
     lightBot.ctx.beginPath();
     lightBot.ctx.moveTo(p1.x, p1.y);
     lightBot.ctx.lineTo(p2.x, p2.y);
@@ -77,10 +98,10 @@
   function drawFrontFaceBox() {
     // front face: p1 is bottom left and rest is counter-clockwise;
     lightBot.ctx.fillStyle = colorFront;
-    var p1 = lightBot.projection.project(this.x * edgeLength, 0, this.y * edgeLength);
-    var p2 = lightBot.projection.project((this.x+1) * edgeLength, 0, this.y * edgeLength);
-    var p3 = lightBot.projection.project((this.x+1) * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
-    var p4 = lightBot.projection.project(this.x * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
+    var p1 = projectRotated(this.x * edgeLength, 0, this.y * edgeLength);
+    var p2 = projectRotated((this.x+1) * edgeLength, 0, this.y * edgeLength);
+    var p3 = projectRotated((this.x+1) * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
+    var p4 = projectRotated(this.x * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
     lightBot.ctx.beginPath();
     lightBot.ctx.moveTo(p1.x, p1.y);
     lightBot.ctx.lineTo(p2.x, p2.y);
@@ -94,10 +115,10 @@
   function drawSideFaceBox() {
     // left side face: p1 is bottom front and rest is counter-clockwise;
     lightBot.ctx.fillStyle = colorSide;
-    var p1 = lightBot.projection.project(this.x * edgeLength, 0, this.y * edgeLength);
-    var p2 = lightBot.projection.project(this.x * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
-    var p3 = lightBot.projection.project(this.x * edgeLength, this.getHeight() * edgeLength, (this.y+1) * edgeLength);
-    var p4 = lightBot.projection.project(this.x * edgeLength, 0, (this.y+1) * edgeLength);
+    var p1 = projectRotated(this.x * edgeLength, 0, this.y * edgeLength);
+    var p2 = projectRotated(this.x * edgeLength, this.getHeight() * edgeLength, this.y * edgeLength);
+    var p3 = projectRotated(this.x * edgeLength, this.getHeight() * edgeLength, (this.y+1) * edgeLength);
+    var p4 = projectRotated(this.x * edgeLength, 0, (this.y+1) * edgeLength);
     lightBot.ctx.beginPath();
     lightBot.ctx.moveTo(p1.x, p1.y);
     lightBot.ctx.lineTo(p2.x, p2.y);

@@ -13,6 +13,7 @@
     <script type="text/javascript" src="js/jquery.ui.touch-punch.js"></script>
     <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
     <script type="text/javascript" src="js/jquery.history.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script type="text/javascript" src="js/lightbot.min.js"></script>
   </head>
   <body>
@@ -29,6 +30,8 @@
         <button class="achievementsButton">Achievements</button>
         <button class="levelSelectButton ui-state-highlight">Start Game</button>
         <button class="audioToggleButton">Toggle Audio</button>
+        <button class="sandboxButton">Map Editor</button>
+        <button class="communityButton">Community</button>
         <button id="exportDataButton" class="saveDataButton">Export Data</button>
         <button id="importDataButton" class="saveDataButton">Import Data</button>
       </div>
@@ -135,6 +138,50 @@
         <button class="mainMenuButton">Main Menu</button>
       </div>
 
+      <div id="sandboxScreen" class="ui-screen ui-helper-hidden">
+        <h1>Map Editor</h1>
+        <div id="sandboxToolbar" style="margin-bottom: 10px; display: flex; gap: 8px; align-items: center;">
+          <label>Tool:</label>
+          <button id="toolBlockButton">Block</button>
+          <button id="toolLampButton">Lamp</button>
+          <button id="toolSpawnButton">Spawn point</button>
+          <label style="margin-left:12px;">Direction:</label>
+          <select id="spawnDirectionSelect">
+            <option value="0">NE</option>
+            <option value="1">NW</option>
+            <option value="2">SW</option>
+            <option value="3">SE</option>
+          </select>
+          <label style="margin-left:12px;">Size:</label>
+          <input id="sandboxWidth" type="number" min="3" max="12" value="9" style="width:60px;"> x
+          <input id="sandboxHeight" type="number" min="3" max="12" value="8" style="width:60px;">
+          <button id="sandboxResizeButton">Resize</button>
+          <button id="sandboxClearButton">Clear</button>
+          <button id="sandboxRotateLeftButton">Rotate Left</button>
+          <button id="sandboxRotateRightButton">Rotate Right</button>
+          <button id="sandboxSaveButton">Save JSON</button>
+          <button id="sandboxImportButton">Import JSON</button>
+          <button id="sandboxPublishButton">Publish</button>
+          <button class="mainMenuButton" style="margin-left:auto;">Main Menu</button>
+        </div>
+        <div id="sandboxCanvasContainer" style="display:flex; justify-content:center;">
+          <div id="sandboxCanvasFrame" style="position:relative; width:1200px; height:666px; margin:0 auto; overflow:hidden;">
+            <canvas id="sandboxCanvas" width="1200" height="666" style="display:block;"></canvas>
+            <div id="sandboxCoordsOverlay" style="position:absolute; top:8px; left:12px; padding:4px 8px; background:rgba(0,0,0,0.55); color:#fff; font-size:12px; border-radius:4px; pointer-events:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="communityScreen" class="ui-screen ui-helper-hidden">
+        <h1>Community maps</h1>
+        <div style="margin-bottom:10px; display:flex; gap:8px; align-items:center;">
+          <input id="communitySearch" type="text" placeholder="Search maps..." style="flex:1; padding:6px;">
+          <button id="communityRefreshButton">Refresh</button>
+          <button class="mainMenuButton">Main Menu</button>
+        </div>
+        <ul id="communityList"></ul>
+      </div>
+
       <div id="gameScreen" class="ui-screen ui-helper-hidden">
         <div class="level-indicator" style="position: absolute; top: 5px; left: 10px; color: #4a4a4a; font-size: 14px; font-weight: 700; z-index: 1000;">Level 0</div>
         <div id="canvasContainer">
@@ -146,6 +193,8 @@
           <button id="clearButton">Clear</button>
           <button id="runButton">Run</button>
           <button id="speedButton">Speed: x1.0</button>
+          <button id="gameRotateLeftButton">Rotate Left</button>
+          <button id="gameRotateRightButton">Rotate Right</button>
         </div>
         <div id="instructionsContainer">
           <h2>Instructions</h2>

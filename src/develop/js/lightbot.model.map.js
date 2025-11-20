@@ -886,7 +886,93 @@
       "silver": 32,
       "bronze": 48
     }
+  },
+  {
+  "direction": 0,
+  "position": {
+    "x": 3,
+    "y": 3
+  },
+  "map": [
+    [
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 1,
+        "t": "l"
+      }
+    ],
+    [
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      }
+    ],
+    [
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      }
+    ],
+    [
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      },
+      {
+        "h": 0,
+        "t": "b"
+      }
+    ]
+  ],
+  "medals": {
+    "gold": 0,
+    "silver": 0,
+    "bronze": 0
   }
+}
 ];
 
   var levelSize = {'x': 0, 'y': 0}; // the level size
@@ -962,6 +1048,59 @@
         console.error('No light defined in map for level', x);
       }
     }
+  };
+
+  // Load a one-off community map object (same JSON structure as built-in maps)
+  // and prepare mapRef/levelSize/medals so the normal game UI can play it.
+  map.loadCommunityMap = function(mapObject, name) {
+    if (!mapObject || !mapObject.map || !mapObject.position) {
+      console.error('Invalid community map object');
+      return;
+    }
+
+    // set the bot starting direction/position just like in loadMap
+    lightBot.bot.init(mapObject.direction || 0, mapObject.position);
+
+    // set medals to a default for community maps
+    medals = mapObject.medals || { gold: 0, silver: 0, bronze: 0 };
+
+    // map files are defined user-friendly so we have to adapt to that
+    levelSize.x = mapObject.map[0].length; // assume rectangle
+    levelSize.y = mapObject.map.length;
+
+    mapRef = new Array(levelSize.x);
+    var i;
+    for (i = 0; i < levelSize.x; i++) {
+      mapRef[i] = new Array(levelSize.y);
+    }
+
+    var nbrLights = 0;
+    for (i = 0; i < mapObject.map.length; i++) {
+      for (var j = 0; j < mapObject.map[i].length; j++) {
+        var cell = mapObject.map[i][j] || { h: 0, t: 'b' };
+        switch (cell.t) {
+          case 'b':
+            mapRef[j][mapObject.map.length - i - 1] = new lightBot.Box(cell.h, j, mapObject.map.length - i - 1);
+            break;
+          case 'l':
+            mapRef[j][mapObject.map.length - i - 1] = new lightBot.LightBox(cell.h, j, mapObject.map.length - i - 1);
+            nbrLights++;
+            break;
+          default:
+            console.error('Community map contains unsupported element: ' + cell.t);
+            mapRef[j][mapObject.map.length - i - 1] = new lightBot.Box(cell.h, j, mapObject.map.length - i - 1);
+            break;
+        }
+      }
+    }
+
+    // remember that we are not on a numbered built-in level
+    levelNumber = null;
+
+    // update currentMapSize for other parts of the game that depend on it
+    currentMapSize = levelSize;
+
+    console.log('Loaded community map:', name || '(unnamed)', 'Lights:', nbrLights);
   };
 
   map.reset = function() {

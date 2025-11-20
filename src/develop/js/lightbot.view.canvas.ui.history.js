@@ -35,6 +35,9 @@ $(document).ready(function() {
             case 'gameScreen':
               lightBot.ui.showGameScreen(State.data.level, true);
               break;
+            case 'communityScreen':
+              lightBot.ui.showCommunityScreen(true);
+              break;
             default:
               console.error('Unknown history page: ' + State.data.page);
               break;

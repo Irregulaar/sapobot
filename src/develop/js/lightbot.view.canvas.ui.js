@@ -94,8 +94,156 @@
       $('.ui-screen').hide();
       $('#levelSelectScreen').show();
     },
+    showSandboxScreen: function(hist) {
+      lightBot.ui.media.playMenuAudio();
+
+      if (hist == null && lightBot.ui.History) lightBot.ui.History.pushState({page: 'sandboxScreen'});
+      $('title').text('SapoBot - Map Editor');
+
+      $('.ui-screen').hide();
+      $('#sandboxScreen').show();
+    },
+    showCommunityScreen: function(hist) {
+      lightBot.ui.media.playMenuAudio();
+
+      if (hist == null && lightBot.ui.History) lightBot.ui.History.pushState({page: 'communityScreen'});
+      $('title').text('SapoBot - Community');
+
+      $('.ui-screen').hide();
+      $('#communityScreen').show();
+
+      if (!window.lightBot || !lightBot.community || !lightBot.community.listMaps) {
+        $('#communityList').empty().append('<li>Community is unavailable.</li>');
+        return;
+      }
+
+      $('#communityList').empty().append('<li>Loading maps...</li>');
+
+      lightBot.community.listMaps().then(function(result) {
+        $('#communityList').empty();
+        if (!result || result.error) {
+          $('#communityList').append('<li>Error loading community maps.</li>');
+          return;
+        }
+        var data = result.data || [];
+        if (!data.length) {
+          $('#communityList').append('<li>No community maps yet.</li>');
+          return;
+        }
+
+        // make the list a flex grid container once
+        $('#communityList').css({
+          display: 'flex',
+          'flex-wrap': 'wrap',
+          'justify-content': 'flex-start',
+          'gap': '10px'
+        });
+        for (var i = 0; i < data.length; i++) {
+          var item = data[i];
+          var name = item.name || ('Map ' + item.id);
+          var $li = $('<li class="community-level ui-state-default" data-id="' + item.id + '" data-name="' + name.replace(/"/g, '&quot;') + '"><span class="level-number">' + name + '</span></li>');
+          // tarjeta cuadrada: ancho fijo, alto mínimo similar, centrado del texto
+          $li.css({
+            width: '160px',
+            height: '120px',
+            padding: '10px',
+            'text-align': 'center',
+            'background-color': '#2c2c2c',
+            'border-radius': '4px',
+            'border': '1px solid #444',
+            'box-sizing': 'border-box',
+            display: 'flex',
+            'align-items': 'center',
+            'justify-content': 'center',
+            cursor: 'pointer',
+            color: '#ffffff',
+            'font-weight': 'bold',
+            'font-size': '14px',
+            'line-height': '1.2',
+            'overflow': 'hidden',
+            'text-overflow': 'ellipsis',
+            'white-space': 'normal'
+          });
+          $li.appendTo('#communityList');
+        }
+
+        // simple search filter
+        $('#communitySearch').off('keyup').on('keyup', function() {
+          var q = $(this).val().toLowerCase();
+          $('#communityList li.community-level').each(function() {
+            var name = ($(this).data('name') || '').toLowerCase();
+            if (!q || name.indexOf(q) !== -1) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        });
+
+        // click handler: load and play community map in normal game UI
+        $('#communityList li.community-level').off('click').on('click', function() {
+          var id = $(this).data('id');
+          if (!id || !lightBot.community || !lightBot.community.getMapById) {
+            return;
+          }
+          // load map by id
+          lightBot.community.getMapById(id).then(function(result) {
+            if (!result || result.error || !result.data || !result.data.map) {
+              alert('Error loading community map.');
+              return;
+            }
+
+            if (!lightBot.map || !lightBot.map.loadCommunityMap) {
+              alert('Community maps are not supported in this build.');
+              return;
+            }
+
+            // mark that we are in a community map
+            if (!window.lightBot) {
+              window.lightBot = {};
+            }
+            lightBot.currentCommunityMap = true;
+
+            // prepare the map
+            lightBot.map.loadCommunityMap(result.data.map, result.data.name);
+
+            // show game screen with a special label
+            lightBot.ui.media.playGameAudio();
+
+            // use the same flow as showGameScreen but without levelNumber
+            if (lightBot.updateProjection) {
+              setTimeout(function() {
+                lightBot.updateProjection();
+              }, 10);
+            }
+
+            if (lightBot.ui.editor && lightBot.ui.editor.cleanup) {
+              lightBot.ui.editor.cleanup();
+            }
+
+            $('#programContainer ul').html('');
+            $('#programContainer ul').append('<li class="ui-state-default placeholder"><p class="placeholder">Drop your instructions here</p></li>');
+            if (lightBot.ui.editor && lightBot.ui.editor.makeDroppable) {
+              lightBot.ui.editor.makeDroppable();
+            }
+
+            $('#runButton').button('option', {label: 'Run', icons: {primary: 'ui-icon-play'}}).removeClass('ui-state-highlight');
+            $('#gameScreen .level-indicator').text('Community map: ' + (result.data.name || id));
+
+            $('.ui-screen').hide();
+            $('#gameScreen').show();
+          });
+        });
+      });
+    },
     showGameScreen: function(level, hist) {
       lightBot.ui.media.playGameAudio();
+
+      // entering a normal level, not a community map
+      if (!window.lightBot) {
+        window.lightBot = {};
+      }
+      lightBot.currentCommunityMap = false;
 
       // load the map
       lightBot.map.loadMap(level);
