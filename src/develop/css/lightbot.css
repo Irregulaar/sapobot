@@ -223,14 +223,62 @@ a:hover {
 /* SCREENS
    ================================================== */
 
+/* Layout principal centrado con columnas laterales de anuncios */
+#pageLayout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 1800px;
+  margin: 40px auto;
+  position: relative;
+}
+
+#leftAds,
+#rightAds {
+  width: 160px;
+  min-height: 740px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: #111;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.ad-slot {
+  width: 100%;
+  min-height: 600px;
+  margin-bottom: 12px;
+  background: #222;
+  border: 1px dashed #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* En pantallas pequeñas, ocultar los laterales para no estorbar el juego */
+@media (max-width: 1400px) {
+  #leftAds,
+  #rightAds {
+    display: none;
+  }
+
+  #pageLayout {
+    justify-content: center;
+  }
+}
+
 #lightbot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: relative;
   width: 1486px;
   height: 740px;
-  margin-left: -743px;
-  margin-top: -370px;
 }
 
 #credits {
